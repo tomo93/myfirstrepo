@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:define name="body">
+		<p:dock position="bottom">
+			<p:menuitem value="Home" icon="images/home.png" url="#" />
+			<p:menuitem value="Music" icon="/images/music.png" url="#" />
+			<!-- <p:menuitem value="Video" icon="/resources/demo/images/dock/video.png" url="#"/>
+            <p:menuitem value="Email" icon="/resources/demo/images/dock/email.png" url="#"/>
+            <p:menuitem value="Portfolio" icon="/resources/demo/images/dock/portfolio.png" url="#"/>
+            <p:menuitem value="Link" icon="/resources/demo/images/dock/link.png" url="#"/>
+            <p:menuitem value="RSS" icon="/resources/demo/images/dock/rss.png" url="#"/>
+            <p:menuitem value="History" icon="/resources/demo/images/dock/history.png" url="#"/>
+      -->
+		</p:dock>
+	</ui:define>
+	<p:breadCrumb>
+		<p:menuitem value="Categories" url="/hello.html" />
+		<p:menuitem value="Sports" url="#" />
+		<p:menuitem value="Basketball" url="#" />
+		<p:menuitem value="NBA" url="#" />
+		<p:menuitem value="Teams" url="#" />
+		<p:menuitem value="L.A. Lakers" url="#" />
+		<p:menuitem value="Roster" url="#" />
+		<p:menuitem value="About us" url="/hello.html" />
+	</p:breadCrumb>
+
+	 <h:form>
+		<p:growl id="messages" showDetail="true" />
+
+		<p:contextMenu>
+			<p:menuitem value="Save" actionListener="#{menuView.save}"
+				update="messages" icon="ui-icon-disk" />
+			<p:menuitem value="Update" actionListener="#{menuView.update}"
+				update="messages" icon="ui-icon-arrowrefresh-1-w" />
+			<p:menuitem value="Delete" actionListener="#{menuView.delete}"
+				ajax="false" icon="ui-icon-close" />
+			<p:menuitem value="Homepage" url="http://www.primefaces.org"
+				icon="ui-icon-extlink" />
+		</p:contextMenu>
+	</h:form> 
+
+	<!-- Form di inserimento -->
+	<h:form>
+		<p:messages />
+		<p:panelGrid columns="2">
+			<h:outputText value="Name: " required="true" />
+			<p:inputText value="#{personView.newPerson.name}" />
+
+
+			<!-- 	<p:calendar /> -->
+
+		</p:panelGrid>
+		<h:commandButton action="#{personView.insertPerson}" value="Inserisci"
+			type="submit" />
+	</h:form>
+
+	<!-- Table from the database -->
+	<h:form>
+		<p:dataTable var="n" value="#{personView.persons}" rows="10"
+			paginator="true" rowsPerPageTemplate="5,10,15">
+			<p:column headerText="Id">
+				<h:outputText value="#{n.personId}" />
+			</p:column>
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{n.name}" />
+			</p:column>
+
+			<p:column headerText="Cognome">
+				<h:outputText value="#{n.surname}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+
+</body>
+</html>
